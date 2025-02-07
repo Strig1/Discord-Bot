@@ -22,15 +22,15 @@ This Discord bot was created using Python as a way to put my Python skills to us
  
    
  
-# 2. Moderation
+# 2. Moderation Features:
 
 * Automatically monitors and enforces rules for:
 
-  * Prevents users from typing in all caps.
+  * Prevents user from using all caps.
 
-  * Blocks users from sending GIFs and images.
+  * Blocks user from sending GIFs and images.
 
-  * Issues warnings and times out users for 30 seconds if they violate these rules.
+  * Issues warnings and times out user for 30 seconds if they violate these rules.
  
      
  
