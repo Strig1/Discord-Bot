@@ -1,10 +1,12 @@
 # Pyhton Discord Bot
 
+
 # Overview
 
 This Discord bot was created using Python as a way to put my Python skills to use. It includes several features for moderation and general experimentation.
 
-Features
+
+# Features
 
 # 1. User Tracking
 
@@ -30,33 +32,38 @@ Features
 
 * /quote: Selects a random quote from a predefined Python dictionary and posts it.
 
+
 # Prerequisites
 
 * Python 3.8 or higher.
 
 * Required Python libraries (can be installed via requirements.txt).
 
+
+
 # Usage
 
 # Commands
 
-# * Prefix Commands:
+#* Prefix Commands:
 
   * !check: View the stats for user join/rejoin activity.
 
-# * Slash Commands:
+#* Slash Commands:
 
   * /media: Posts a random media file (gif, image, or video).
 
   * /quote: Posts a random quote.
 
-# * Moderation Features
+#* Moderation Features
 
 * Automatically monitors and enforces rules for:
 
   * Excessive use of caps.
 
   * Posting unauthorized gifs or images.
+
+
 
 # Customisation
 
@@ -68,6 +75,8 @@ You can extend the bot's functionality by modifying the Python files:
 
 * Moderation: Modify rules or add new ones in the moderation module.
 
+
+
 # Contributing
 
 If you'd like to contribute:
@@ -77,6 +86,8 @@ If you'd like to contribute:
  2. Create a new branch.
 
  3. Make your changes and submit a pull request.
+
+
 
 # License
 
