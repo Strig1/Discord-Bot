@@ -36,7 +36,7 @@ This Discord bot was created using Python as a way to put my Python skills to us
  
 # 3. Slash Commands
 
-* /media: Randomly posts a GIF, image, or video from a specified directory.
+* /media: Randomly posts a GIF, image, or video from a specified directory with the ability to add rarity drop rate.
 
 * /quote: Selects a random quote from a predefined Python dictionary and posts it.
  
