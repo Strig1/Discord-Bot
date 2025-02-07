@@ -1,4 +1,4 @@
-# Pyhton Discord Bot
+# Python Discord Bot
 
 
 # Overview
