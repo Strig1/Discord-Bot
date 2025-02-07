@@ -22,7 +22,7 @@ This Discord bot was created using Python as a way to put my Python skills to us
  
    
  
-# 2. Moderation Features:
+# 2. Moderation Features
 
 * Automatically monitors and enforces rules for:
 
