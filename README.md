@@ -37,13 +37,10 @@ This Discord bot was created using Python as a way to put my Python skills to us
 
 * Python 3.8 or higher.
 
-* Required Python libraries (can be installed via requirements.txt).
+* Required Python libraries: pip install discord.py pytz
 
 
 
-# Usage
-
-# Commands
 
 # Prefix Commands:
 
@@ -65,37 +62,6 @@ This Discord bot was created using Python as a way to put my Python skills to us
 
 
 
-# Customisation
-
-You can extend the bot's functionality by modifying the Python files:
-
-* User Tracking: Edit the logic in the tracking module to adjust behaviour.
-
-* Media and Quotes: Update the directories or dictionary for the /media and /quote commands.
-
-* Moderation: Modify rules or add new ones in the moderation module.
-
-
-
-# Contributing
-
-If you'd like to contribute:
-
- 1. Fork the repository.
-
- 2. Create a new branch.
-
- 3. Make your changes and submit a pull request.
-
-
-
-# License
-
-This project is licensed under the MIT License.
-
-# Acknowledgements
-
-This bot was created as a way to explore Python and Discord bot development. Special thanks to the Discord.py library and the open-source community for inspiration and support.
 
 
 
