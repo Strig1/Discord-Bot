@@ -22,9 +22,9 @@ This Discord bot was created using Python as a way to put my Python skills to us
 
 * Prevents users from typing in all caps.
 
-  *Blocks users from sending GIFs and images.
+  * Blocks users from sending GIFs and images.
 
-  *Issues warnings and times out users for 30 seconds if they violate these rules.
+  * Issues warnings and times out users for 30 seconds if they violate these rules.
 
 # 3. Slash Commands
 
