@@ -45,17 +45,17 @@ This Discord bot was created using Python as a way to put my Python skills to us
 
 # Commands
 
-#* Prefix Commands:
+# Prefix Commands:
 
   * !check: View the stats for user join/rejoin activity.
 
-#* Slash Commands:
+# Slash Commands:
 
   * /media: Posts a random media file (gif, image, or video).
 
   * /quote: Posts a random quote.
 
-#* Moderation Features
+# Moderation Features
 
 * Automatically monitors and enforces rules for:
 
