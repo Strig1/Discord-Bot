@@ -1,6 +1,7 @@
 import discord
 import random
 import os
+import re
 from discord.ext import commands
 
 TOKEN = "Token"
@@ -11,23 +12,39 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 media_folder = "Folder Directory"
 rare_media_folder = "Folder Directory"
 
-quotes = [
-    "quote 1",
-    "Quote 2",
+# Ability to load quotes from a text file
+def load_quotes(filename="quotes.txt"):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            return [line.strip() for line in file.readlines()]
+    except FileNotFoundError:
+        print(f"Error: {filename} not found.")
 
-]
-# Randomly selects a quote from the list
+
+# Function to replace "@username" with actual Discord mentions
+def replace_mentions(quote, guild):
+    mention_pattern = r"@(\w+)"  # Matches "@username"
+
+    def replace_match(match):
+        username = match.group(1)
+        for member in guild.members:  # Search for user in server
+            if member.name == username or member.display_name == username:
+                return member.mention  # Replace with proper mention
+        return match.group(0)  # Return original if no match
+
+    return re.sub(mention_pattern, replace_match, quote)
+
+# Slash command for random quote
 @bot.tree.command(name="quote", description="Get a random inspirational quote")
 async def quote(interaction: discord.Interaction):
-    random_quote = random.choice(quotes)
-    await interaction.response.send_message(random_quote)
+    quotes = load_quotes()  # ✅ Reloads quotes every time
+    if not quotes:
+        await interaction.response.send_message("No quotes available!", ephemeral=True)
+        return
 
-
-# Randomly selects a quote from the list
-@bot.tree.command(name="quote", description="Get a random inspirational quote")
-async def quote(interaction: discord.Interaction):
     random_quote = random.choice(quotes)
-    await interaction.response.send_message(random_quote)
+    formatted_quote = replace_mentions(random_quote, interaction.guild)
+    await interaction.response.send_message(formatted_quote, allowed_mentions=discord.AllowedMentions(users=True))
 
 
 # Slash command:
