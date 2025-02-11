@@ -2,6 +2,7 @@ import discord
 import random
 import os
 import re
+import difflib
 from discord.ext import commands
 
 TOKEN = "Token"
@@ -22,22 +23,49 @@ def load_quotes(filename="quotes.txt"):
 
 
 # Function to replace "@username" with actual Discord mentions
+def load_quotes(filename="quotes.txt"):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            return [line.strip() for line in file.readlines() if line.strip()]
+    except FileNotFoundError:
+        print(f"Error: {filename} not found.")
+
+# Function to replace "@username" with actual Discord mentions
 def replace_mentions(quote, guild):
-    mention_pattern = r"@(\w+)"  # Matches "@username"
+    mention_pattern = r"@(\w+)"  # Captures only the first word after "@"
+
+    # Create a dictionary of members {lowercased_name: member_object}
+    member_map = {member.name.lower(): member for member in guild.members}
+    nickname_map = {member.display_name.lower(): member for member in guild.members}
 
     def replace_match(match):
-        username = match.group(1)
-        for member in guild.members:  # Search for user in server
-            if member.name == username or member.display_name == username:
-                return member.mention  # Replace with proper mention
-        return match.group(0)  # Return original if no match
+        username = match.group(1).strip().lower()  # Normalise case and remove spaces
+
+        # Direct match (preferred)
+        if username in member_map:
+            return member_map[username].mention
+        if username in nickname_map:
+            return nickname_map[username].mention
+
+        # Fuzzy match finds closest username
+        all_names = list(member_map.keys()) + list(nickname_map.keys())
+        closest_match = difflib.get_close_matches(username, all_names, n=1, cutoff=0.6)  # 60% similarity
+
+        if closest_match:
+            best_match = closest_match[0]
+            member = member_map.get(best_match) or nickname_map.get(best_match)
+            if member:
+                return member.mention  # Replace with actual mention
+
+        print(f"⚠️ Mention not found: {username}")  # Debugging log
+        return match.group(0)  # Keep original text if no match found
 
     return re.sub(mention_pattern, replace_match, quote)
 
 # Slash command for random quote
 @bot.tree.command(name="quote", description="Get a random inspirational quote")
 async def quote(interaction: discord.Interaction):
-    quotes = load_quotes()  # ✅ Reloads quotes every time
+    quotes = load_quotes()  # Reloads quotes every time
     if not quotes:
         await interaction.response.send_message("No quotes available!", ephemeral=True)
         return
