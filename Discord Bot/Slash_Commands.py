@@ -11,6 +11,7 @@ intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 media_folder = "Folder Directory"
+ultra_rare_media_folder = "Folder Directory"
 rare_media_folder = "Folder Directory"
 
 # Ability to load quotes from a text file
@@ -70,8 +71,11 @@ async def quote(interaction: discord.Interaction):
         await interaction.response.send_message("No quotes available!", ephemeral=True)
         return
 
-    random_quote = random.choice(quotes)
-    formatted_quote = replace_mentions(random_quote, interaction.guild)
+    # Direct match (preferred)
+    if username in member_map:
+        return member_map[username].mention
+     if username in nickname_map:
+        return nickname_map[username].mention
     await interaction.response.send_message(formatted_quote, allowed_mentions=discord.AllowedMentions(users=True))
 
 
@@ -84,8 +88,13 @@ async def media(interaction: discord.Interaction):
     random_number = random.randint(1, 1_000_000)
     print(f"Rolled number: {random_number}")
 
-    # Placeholder: always selects media_folder
-    chosen_folder = rare_media_folder if random_number == 1 else media_folder  # Uncomment to enable rarity check
+    if random_number == 1:
+        chosen_folder = ultra_rare_media_folder  # Ultra rare (1 in 1,000,000)
+    elif random_number == 100_000:
+        chosen_folder = rare_media_folder  # Rare (1 in 100,000)
+    else:
+        chosen_folder = media_folder  # Common 
+
     # List all media files
     media_files = [f for f in os.listdir(media_folder) if f.endswith(('.jpg', '.png', '.gif', '.mp4'))]
 
